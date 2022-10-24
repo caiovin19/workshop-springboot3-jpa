@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.caio.project.entities.Category;
 import com.caio.project.entities.Order;
+import com.caio.project.entities.OrderItem;
 import com.caio.project.entities.Product;
 import com.caio.project.entities.User;
 import com.caio.project.entities.enums.OrderStatus;
 import com.caio.project.repositories.CategoryRepository;
+import com.caio.project.repositories.OrderItemRepository;
 import com.caio.project.repositories.OrderRepository;
 import com.caio.project.repositories.ProductRepository;
 import com.caio.project.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 
 	@Override
@@ -72,6 +77,13 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
 		
 		
